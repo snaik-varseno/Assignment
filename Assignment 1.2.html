@@ -1,0 +1,60 @@
+<html>
+<head>
+  <title>Assignment 1.2</title>
+  <style>
+    table {
+      width: 100%;
+    }
+    table, th, td {
+      border: 1px solid black;
+    }
+   
+  </style>
+</head>
+<body>
+
+  <h2>Product List</h2>
+  <table id="productTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Image</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+  <script>
+ 
+    async function fetchData() {
+      try {
+        const res = await fetch('https://dummyjson.com/products');
+        const apiData = await res.json();
+        const tableBody = document.getElementsByTagName('tbody')[0];
+        apiData.products.forEach(product => {
+          // create row
+          const row = tableBody.insertRow();
+          
+         // create cell in r
+          const cell1 = row.insertCell(0);
+          const cell2 = row.insertCell(1);
+          const cell3 = row.insertCell(2);
+          const cell4 = row.insertCell(3);
+
+          cell1.textContent = product.id;
+          cell2.textContent = product.title;
+          cell3.textContent = `${product.price}`;
+          cell4.innerHTML = "<img src='"+product.thumbnail+"'/ hight=40 width=60>";
+        });
+      } catch (error) {
+        console.error("error",error);
+      }
+    }
+    window.onload = fetchData;
+  </script>
+
+</body>
+</html>

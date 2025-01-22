@@ -1,0 +1,43 @@
+<html>
+<head>
+  <title>Assignment 1.1</title>
+</head>
+<body>
+  <p>Input field and Submit Button Example</p>
+  <input type="text" id="txt_input" >
+  <button id="submitButton" onclick="submitClick()">Submit</button>
+
+ <p><span id="show"></span></p> 
+
+  <script>
+ const txtElement = document.getElementById('txt_input');
+ const showSpan = document.getElementById('show');
+ const submitElement = document.getElementById('submitButton');
+//on click event 
+function submitClick(){
+ showSpan.innerText=txtElement.value;
+}
+
+// mouseover event
+txtElement.addEventListener('mouseover', function() {
+showSpan.style.fontSize="30px";
+    });    
+    
+    // mouseout event
+txtElement.addEventListener('mouseout', function() {
+     showSpan.style.fontSize="20px";
+    });    
+    // on change event
+txtElement.addEventListener('change', function() {
+    console.log("change event ",txtElement.value);
+    });
+   // input event
+    txtElement.addEventListener('input', function() {
+      console.log("input event ",txtElement.value);
+    });
+    
+    
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<html>
+
+<head>
+  <style>
+    table {
+      width: 100%;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h3>TODO App</h2>
+
+    <input type="text" id="txtBox" placeholder="Enter task">
+    <button id="submitButton" onclick="addTodo()">Add To-Do</button>
+
+    <table id="todoTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Task</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+
+    <script>
+      // get todos from localStorage
+      function loadTodos() {
+        const todos = JSON.parse(localStorage.getItem('todos')) || [];
+        const tableBody = document.getElementsByTagName('tbody')[0];
+        tableBody.innerHTML = ''; // Clear the table before repopulating
+        todos.forEach((todo, index) => {
+          const row = tableBody.insertRow();
+          row.insertCell(0).textContent = index + 1;
+          row.insertCell(1).textContent = todo;
+
+        });
+      }
+
+      // add todo
+      function addTodo() {
+        const txtBox = document.getElementById('txtBox');
+        const todoText = txtBox.value.trim();
+        if (todoText) {
+          const todos = JSON.parse(localStorage.getItem('todos')) || [];
+          todos.push(todoText);
+          localStorage.setItem('todos', JSON.stringify(todos));
+          txtBox.value = ''; 
+          loadTodos(); 
+        } 
+      }
+      window.onload = loadTodos;
+    </script>
+
+</body>
+
+</html>
